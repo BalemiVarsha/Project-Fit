@@ -1,6 +1,6 @@
 import React ,{useState}from 'react';
 import './Login.css';
-import { URL } from '../../data';
+import { URL } from '../data';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { URL } from '../../data';
+import { URL } from '../data';
 import './Login.css'
 const Admin=()=>{
     

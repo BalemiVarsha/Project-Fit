@@ -7,6 +7,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import './AddProject.css';
 import { URL } from '../../data';
 
+console.log(URL)
+
 const AddProjects = () => {
   const [project, setProject] = useState({
     projectId: uuidv4(),
