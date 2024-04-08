@@ -1,11 +1,13 @@
 import React,{useState} from 'react';
 import '../Login.css';
 import { URL } from '../../data';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 const EmpLogin=()=>{
    
     const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
   async function admin(event){
       event.preventDefault()
       const response =await fetch(`${URL}/employeelogin`,{
@@ -27,7 +29,8 @@ const EmpLogin=()=>{
       if (response.ok) {
         alert('Login successful');
         // Redirect to employee dashboard with employee ID
-        window.location.href = `/employee/dashboard/${data.employeeId}`;
+        // window.location.href = `/employee/dashboard/${data.employeeId}`;
+        navigate(`/employee/dashboard/${data.employeeId}`)
     } else {
         alert('Please check your email and password');
     }

@@ -59,7 +59,7 @@ const App=()=> {
        <Route path="/projectmanagerlogin" element={<PmLogin/>} />
        <Route path="/pmdashboard" element={<PmDashboard />} />
        <Route path="/pmdashboard" element={<PmDashboard />} />
-       <Route path="/dashboard" element={<DashB />} />
+       <Route path="/projectmanager" element={<DashB />} />
        <Route path="/all-projects" element={<AllProjects />} />
        <Route path="/update-project/:projectId" element={<EditProject />} />
        <Route path="/add-projects" element={<AddProjects />} />

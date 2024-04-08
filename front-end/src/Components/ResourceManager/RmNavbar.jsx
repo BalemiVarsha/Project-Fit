@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { URL } from '../../data';
+import { useNavigate } from 'react-router-dom';
 import { FaSearch, FaBell } from 'react-icons/fa'; // Importing icons from react-icons
 import '../ProjectManager/PmNavbar.css'; // Importing CSS file for styling
 import io from 'socket.io-client';
@@ -10,6 +11,7 @@ const RmNavbar = () => {
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
+    const navigate = useNavigate();
     useEffect(() => {
         socket.on("resource-message", (num,data) => {
             console.log(num)
@@ -42,7 +44,8 @@ const RmNavbar = () => {
             setSearchResults(data);
             console.log("Search Results:", data);
             // window.location.href = '/all-projects';
-            window.location.href = `/manage-employees?searchQuery=${encodeURIComponent(searchQuery)}`;
+            // window.location.href = `/manage-employees?searchQuery=${encodeURIComponent(searchQuery)}`;
+            navigate(`/manage-employees?searchQuery=${encodeURIComponent(searchQuery)}`)
         } catch (error) {
             console.error('Error performing search:', error);
         }

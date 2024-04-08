@@ -1,6 +1,7 @@
 import React ,{useState}from 'react';
 import './Pmlogin.css'
 import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import { URL } from '../../data';
 
@@ -8,6 +9,7 @@ const PmLogin = () => {
 
   const[username,setUsername]=useState(' ');
   const[password,setPassword]=useState(' ');
+  const navigate = useNavigate();
   async function admin(event){
       event.preventDefault()
       const response =await fetch(`${URL}/api/projectmanagerlogin`,{
@@ -23,7 +25,8 @@ const PmLogin = () => {
       if(data.user){
         const token=localStorage.setItem('token',data.user)
         toast.success('Login successful')
-        window.location.href='/dashboard'
+        // window.location.href='/dashboard'
+        navigate('/projectmanager')
       }else{
         toast.error("please check your username and password")
       }
