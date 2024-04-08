@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './RmDashboard.css'
 import RmNavbar from './RmNavbar';
 import { MdOutlinePersonAddAlt } from "react-icons/md";
@@ -23,9 +23,9 @@ const RmDashboard = () => {
 
       <div className="sidebarr">
         {/* <NavLink to="/" className="header"> */}
-        <a  href="/">
+        <Link to="/">
           <img  src="/images/pf1.png" alt="Project Fit" />
-          </a>
+          </Link>
         {/* </NavLink> */}
 
         <ul>

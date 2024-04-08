@@ -3,6 +3,7 @@ import { FaSearch, FaBell } from 'react-icons/fa';
 import { URL } from '../../data';
 import '../ProjectManager/PmNavbar.css';
 import io from 'socket.io-client';
+import { Link } from 'react-router-dom';
 const socket = io.connect(`${URL}`);
 
 const EmpNavbar = () => {
@@ -53,9 +54,9 @@ const EmpNavbar = () => {
 
     return (
         <nav className="navbar">
-            <a className='navimg'href="/">
+            <Link className='navimg'to="/">
           <img src="/images/pf2.png" alt="Project Fit" />
-        </a>
+        </Link>
             <div className="left">
                 <form className="search-form" onSubmit={handleSearch} >
                     <input

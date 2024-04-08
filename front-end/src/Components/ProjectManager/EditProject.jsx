@@ -4,7 +4,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PmDashboard from './PmDashboard';
 import './AddProject.css';
-import { URL } from '../../data';
+// import { URL } from '../../data';
+import {URL} from '../../data'
 const UpdateProjects = () => {
     let { projectId } = useParams();
   const [projectDetails, setProjectDetails] = useState({

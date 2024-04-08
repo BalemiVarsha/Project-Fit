@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink} from 'react-router-dom';
+import { Link, NavLink} from 'react-router-dom';
 import './PmDashboard.css'
 import PmNavbar from './PmNavbar';
 
@@ -27,9 +27,9 @@ import { RiLogoutBoxRLine } from "react-icons/ri";
     <img src="/images/pf1.png" alt="Project Fit" />
   
   </NavLink> */}
-  <a  href="/">
+  <Link to="/">
           <img  src="/images/pf1.png" alt="Project Fit" />
-          </a>
+          </Link>
   <ul>
   <li className={id.includes("dashboard") && "test"}>
       <NavLink to="/dashboard"><GoHome className="icon"/>Dashboard</NavLink>

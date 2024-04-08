@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './Select.css'
 const Select = () => {
   return (
@@ -18,7 +18,7 @@ const Select = () => {
                <NavLink to='/adminlogin'> <button>Resource Manager</button></NavLink> <br></br>
                 <NavLink to='/projectmanagerlogin'><button>Project Manager</button></NavLink> 
                 <NavLink to='/employeelogin'><button>Employee</button></NavLink> 
-                <a href='/create' className='create'>Create</a>
+                <Link to='/create' className='create'>Create</Link>
                  </div>
              
          </form>
