@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
+import { URL } from '../../data';
 import RmDashboard from './RmDashboard';
 import { useLocation } from 'react-router-dom';
 import './ManageEmployee.css';
@@ -23,7 +24,7 @@ const ManageEmployee = () => {
 
   const fetchEmployeeData = async () => {
     try {
-      const response = await fetch('http://localhost:5000/employee-data');
+      const response = await fetch(`${URL}/employee-data`);
       if (!response.ok) {
         throw new Error('Failed to fetch employee data');
       }
@@ -35,7 +36,7 @@ const ManageEmployee = () => {
   };
   const handleViewResume = async (employeeId) => {
     try {
-      window.open(`http://localhost:5000/employee-data/${employeeId}/pdf`, '_blank');
+      window.open(`${URL}/employee-data/${employeeId}/pdf`, '_blank');
     } catch (error) {
       console.error('Error viewing project PDF:', error);
     }
@@ -47,7 +48,7 @@ const ManageEmployee = () => {
   };
   const handleDelete = async (employeeId) => {
         try {
-          const response = await fetch(`http://localhost:5000/employee-data/${employeeId}`, {
+          const response = await fetch(`${URL}/employee-data/${employeeId}`, {
             method: 'DELETE'
           });
           if (!response.ok) {

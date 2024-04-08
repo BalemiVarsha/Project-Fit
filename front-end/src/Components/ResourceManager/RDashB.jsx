@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import RmDashboard from './RmDashboard';
 import './RDashB.css'
-
+import { URL } from '../../data';
 const RDashB = () => {
     const [employeeCount, setEmployeeCount] = useState(0);
     const [projectCount, setProjectCount] = useState(0);
@@ -11,7 +11,7 @@ const RDashB = () => {
         // Fetch employee count from MongoDB collection
         const fetchEmployeeCount = async () => {
             try {
-                const response = await fetch('http://localhost:5000/employee-count');
+                const response = await fetch(`${URL}/employee-count`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch employee count');
                 }
@@ -25,7 +25,7 @@ const RDashB = () => {
         // Fetch project count from MongoDB collection
         const fetchProjectCount = async () => {
             try {
-                const response = await fetch('http://localhost:5000/project-count');
+                const response = await fetch(`${URL}/project-count`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch project count');
                 }
@@ -37,7 +37,7 @@ const RDashB = () => {
         };
         const fetchRequestCount = async () => {
             try {
-                const response = await fetch('http://localhost:5000/request-count');
+                const response = await fetch(`${URL}/request-count`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch project count');
                 }
@@ -49,7 +49,7 @@ const RDashB = () => {
         };
         const fetchProjects = async () => {
             try {
-                const response = await fetch('http://localhost:5000/Project-data');
+                const response = await fetch(`${URL}/Project-data`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch projects');
                 }

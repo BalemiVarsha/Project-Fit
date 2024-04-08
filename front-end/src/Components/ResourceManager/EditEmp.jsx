@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
+import { URL } from '../../data';
 import 'react-toastify/dist/ReactToastify.css';
 import RmDashboard from './RmDashboard';
 import RmNavbar from './RmNavbar';
@@ -20,7 +21,7 @@ import RmNavbar from './RmNavbar';
       useEffect(() => {
         const fetchProjectDetails = async () => {
           try {
-            const response = await fetch(`http://localhost:5000/employee-data/${employeeId}`);
+            const response = await fetch(`${URL}/employee-data/${employeeId}`);
             if (!response.ok) {
               throw new Error('Failed to fetch project details');
             }
@@ -65,7 +66,7 @@ import RmNavbar from './RmNavbar';
          formData.append('status', employeeDetails.status);
         //  formData.append('resume', employeeDetails.resume);
     
-          const response = await fetch(`http://localhost:5000/update-employee/${employeeId}`, {
+          const response = await fetch(`${URL}/update-employee/${employeeId}`, {
             method: 'PUT',
             body: formData
           });

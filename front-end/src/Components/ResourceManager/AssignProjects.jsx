@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import RmDashboard from './RmDashboard';
+import { URL } from '../../data';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Chart from 'chart.js/auto';
 import './Assign.css';
 import io from 'socket.io-client';
-const socket = io.connect("http://localhost:5000")
+const socket = io.connect(`${URL}`)
 const AssignProjects = () => {
   const [titles, setTitles] = useState([]);
   const [departments, setDepartments] = useState([]);
@@ -36,7 +37,7 @@ const AssignProjects = () => {
 
   const fetchTitlesFromDatabase = async () => {
     try {
-      const response = await fetch('http://localhost:5000/titles');
+      const response = await fetch(`${URL}/titles`);
       if (response.ok) {
         const data = await response.json();
         setTitles(data.titles);
@@ -50,7 +51,7 @@ const AssignProjects = () => {
 
   const fetchDepartmentsFromDatabase = async () => {
     try {
-      const response = await fetch('http://localhost:5000/department');
+      const response = await fetch(`${URL}/department`);
       if (response.ok) {
         const data = await response.json();
         setDepartments(data.departments);
@@ -64,14 +65,14 @@ const AssignProjects = () => {
   const viewProjectPdf = async (projectId) => {
 
     try {
-      window.open(`http://localhost:5000/Project-data/${projectId}/pdf`, '_blank');
+      window.open(`${URL}/Project-data/${projectId}/pdf`, '_blank');
     } catch (error) {
       console.error('Error viewing project PDF:', error);
     }
   };
   const handleViewResume = async (employeeId) => {
     try {
-      window.open(`http://localhost:5000/employee-data/${employeeId}/pdf`, '_blank');
+      window.open(`${URL}/employee-data/${employeeId}/pdf`, '_blank');
     } catch (error) {
       console.error('Error viewing project PDF:', error);
     }
@@ -79,7 +80,7 @@ const AssignProjects = () => {
 
   const fetchProjectDetails = async (title) => {
     try {
-      const response = await fetch(`http://localhost:5000/project?title=${title}`);
+      const response = await fetch(`${URL}/project?title=${title}`);
       if (response.ok) {
         const data = await response.json();
         setProjectDetails(data);
@@ -95,7 +96,7 @@ const AssignProjects = () => {
 
   const fetchEmpoyeeDetails = async (department) => {
     try {
-      const response = await fetch(`http://localhost:5000/employee-data?department=${department}`);
+      const response = await fetch(`${URL}/employee-data?department=${department}`);
       if (response.ok) {
         const data = await response.json();
         setDepartmentEmployees(data);
@@ -112,7 +113,7 @@ const AssignProjects = () => {
 
   const fetchProjectPDF = async (projectId) => {
     try {
-      const response = await fetch(`http://localhost:5000/Project-data/${projectId}/pdf`);
+      const response = await fetch(`${URL}/Project-data/${projectId}/pdf`);
       if (response.ok) {
         const blob = await response.blob();
         setProjectPDF(blob);
@@ -126,7 +127,7 @@ const AssignProjects = () => {
 
   const fetchEmployeeResume = async (employeeId) => {
     try {
-      const response = await fetch(`http://localhost:5000/employee-data/${employeeId}/pdf`);
+      const response = await fetch(`${URL}/employee-data/${employeeId}/pdf`);
       if (response.ok) {
         const blob = await response.blob();
         setEmployeeResume(blob);
@@ -164,7 +165,7 @@ const AssignProjects = () => {
 
     if (selectedTitle && selectedDepartment) {
       try {
-        const response = await fetch(`http://localhost:5000/calculate-score?department=${selectedDepartment}&title=${selectedTitle}`, {
+        const response = await fetch(`${URL}/calculate-score?department=${selectedDepartment}&title=${selectedTitle}`, {
           method: 'POST'
         });
 
@@ -269,7 +270,7 @@ const AssignProjects = () => {
     };
 
     // Make a POST request to the backend
-    fetch(`http://localhost:5000/refer`, {
+    fetch(`${URL}/refer`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

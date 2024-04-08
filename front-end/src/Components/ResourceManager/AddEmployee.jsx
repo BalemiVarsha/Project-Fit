@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid'; 
+import { URL } from '../../data';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import RmDashboard from './RmDashboard';
@@ -111,7 +112,7 @@ const AddEmployee = () => {
       formData.append('status', employee.status);
       formData.append('resume', employee.resume);
 
-      const response = await fetch('http://localhost:5000/api/addEmployee', {
+      const response = await fetch(`${URL}/api/addEmployee`, {
         method: 'POST',
         body: formData,
         headers:{

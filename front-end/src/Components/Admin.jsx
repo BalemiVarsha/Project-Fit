@@ -1,4 +1,5 @@
 import React,{useState} from 'react';
+import { URL } from '../../data';
 import './Login.css'
 const Admin=()=>{
     
@@ -30,7 +31,7 @@ const Admin=()=>{
         validatePassword();
         if (!usernameError && !passwordError) {
             // Submit the form or call API to register user
-            const response = await fetch('http://localhost:5000/api/admincreation', {
+            const response = await fetch(`${URL}/api/admincreation`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

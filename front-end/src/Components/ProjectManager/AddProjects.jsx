@@ -5,6 +5,7 @@ import PmDashboard from './PmDashboard';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './AddProject.css';
+import { URL } from '../../data';
 
 const AddProjects = () => {
   const [project, setProject] = useState({
@@ -48,7 +49,7 @@ const AddProjects = () => {
       formData.append('description', project.description);
       formData.append('status', project.status);
 
-      const response = await fetch('http://localhost:5000/api/add-projects', {
+      const response = await fetch(`${URL}/api/add-projects`, {
         method: 'POST',
         body: formData, 
         headers:{

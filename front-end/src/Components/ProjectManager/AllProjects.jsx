@@ -6,7 +6,7 @@ import PmDashboard from './PmDashboard';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useLocation } from 'react-router-dom';
-
+import { URL } from '../../data';
 
 import './AllProjects.css';
 
@@ -15,7 +15,7 @@ import './AllProjects.css';
 
 
 
-const socket=io.connect("http://localhost:5000")
+const socket=io.connect(`${URL}`)
 
 
 
@@ -39,7 +39,7 @@ const AllProjects = () => {
   }, [location.search]);
   const fetchProjectData = async () => {
     try {
-      const response = await fetch('http://localhost:5000/Project-data');
+      const response = await fetch(`${URL}/Project-data`);
       if (!response.ok) {
         throw new Error('Failed to fetch project data');
       }
@@ -56,17 +56,7 @@ const AllProjects = () => {
   const splitDateByT = (date) => {
     return date.split('T')[0];
 };
-  // const filteredProjects = () => {
- 
-  //   if (filter === 'referred') {
-  //     return projects.filter(project => project.referredEmployees && project.referredEmployees.length > 0);
-  //   } else if (filter === 'nonReferred') {
-  //     return projects.filter(project => !project.referredEmployees || project.referredEmployees.length === 0);
-  //   } else {
-  //     return projects; // Show all projects when no filter applied
-  //   }
-  
-  // };
+
   const filteredProjects = () => {
     let filtered = projects;
     if (filter === 'referred') {
@@ -94,7 +84,7 @@ const AllProjects = () => {
   };
   const viewProjectPdf = async (projectId) => {
     try {
-      window.open(`http://localhost:5000/Project-data/${projectId}/pdf`, '_blank');
+      window.open(`${URL}/Project-data/${projectId}/pdf`, '_blank');
     } catch (error) {
       console.error('Error viewing project PDF:', error);
     }
@@ -106,7 +96,7 @@ const AllProjects = () => {
 
   const handleSendRequest = async (project) => {
     try {
-      const response = await fetch('http://localhost:5000/api/send-request', {
+      const response = await fetch(`${URL}/api/send-request`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -124,7 +114,7 @@ const AllProjects = () => {
 
   const handleDelete = async (projectId) => {
     try {
-      const response = await fetch(`http://localhost:5000/Project-data/${projectId}`, {
+      const response = await fetch(`${URL}/Project-data/${projectId}`, {
         method: 'DELETE'
       });
       if (!response.ok) {
@@ -205,7 +195,7 @@ const EmployeeDetails = ({ employeeId }) => {
   useEffect(() => {
     const fetchDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/employees/${employeeId}`);
+        const response = await fetch(`${URL}/employees/${employeeId}`);
         if (!response.ok) {
           throw new Error('Failed to fetch employee details');
         }
@@ -225,7 +215,7 @@ const EmployeeDetails = ({ employeeId }) => {
 
   const handleViewResume = async (employeeId) => {
     try {
-      window.open(`http://localhost:5000/employee-data/${employeeId}/pdf`, '_blank');
+      window.open(`${URL}/employee-data/${employeeId}/pdf`, '_blank');
     } catch (error) {
       console.error('Error viewing employee resume:', error);
     }

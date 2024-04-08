@@ -1,5 +1,6 @@
 import React ,{useState}from 'react';
 import './Login.css';
+import { URL } from '../../data';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -12,7 +13,7 @@ const AdminLogin = () => {
       event.preventDefault()
      
   
-      const response =await fetch('http://localhost:5000/api/adminlogin',{
+      const response =await fetch(`${URL}/api/adminlogin`,{
           method:'POST',
           headers:{
               'Content-Type': 'application/json',

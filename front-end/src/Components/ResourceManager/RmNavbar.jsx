@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { URL } from '../../data';
 import { FaSearch, FaBell } from 'react-icons/fa'; // Importing icons from react-icons
 import '../ProjectManager/PmNavbar.css'; // Importing CSS file for styling
 import io from 'socket.io-client';
-const socket = io.connect("http://localhost:5000");
+const socket = io.connect(`${URL}`);
 
 const RmNavbar = () => {
     const [receivedMessages, setReceivedMessages] = useState([]);
@@ -29,7 +30,7 @@ const RmNavbar = () => {
         e.preventDefault();
         const token = localStorage.getItem('token');
         try {
-            const res = await fetch('http://localhost:5000/searchemployee', {
+            const res = await fetch(`${URL}/searchemployee`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' , 'Authorization': `Bearer ${token}`},
                 body: JSON.stringify({ search: searchQuery })

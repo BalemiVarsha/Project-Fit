@@ -4,7 +4,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PmDashboard from './PmDashboard';
 import './AddProject.css';
-
+import { URL } from '../../data';
 const UpdateProjects = () => {
     let { projectId } = useParams();
   const [projectDetails, setProjectDetails] = useState({
@@ -21,7 +21,7 @@ const UpdateProjects = () => {
   useEffect(() => {
     const fetchProjectDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/Project-data/${projectId}`);
+        const response = await fetch(`${URL}/Project-data/${projectId}`);
         if (!response.ok) {
           throw new Error('Failed to fetch project details');
         }
@@ -87,7 +87,7 @@ const UpdateProjects = () => {
       formData.append('description', projectDetails.description);
       formData.append('filePath', projectDetails.filePath);
 
-      const response = await fetch(`http://localhost:5000/update-project/${projectId}`, {
+      const response = await fetch(`${URL}/update-project/${projectId}`, {
         method: 'PUT',
         body: formData
       });

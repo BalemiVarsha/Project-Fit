@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import { URL } from '../../data';
 import PmDashboard from './PmDashboard';
 import PmNavbar from './PmNavbar';
 import './SendRequest.css';
@@ -10,7 +10,7 @@ const SendRequest = () => {
   const [projects, setProjects] = useState([]);
   const fetchProjData = async () => {
     try {
-      const response = await fetch('http://localhost:5000/Project-data');
+      const response = await fetch(`${URL}Project-data`);
       if (!response.ok) {
         throw new Error('Failed to fetch project data');
       }
@@ -22,7 +22,7 @@ const SendRequest = () => {
   };
   const fetchProjectData = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/send-request`);
+      const response = await fetch(`${URL}/api/send-request`);
       if (!response.ok) {
         throw new Error('Failed to fetch project data');
       }
@@ -41,14 +41,14 @@ const SendRequest = () => {
   const viewProjectPdf = async (projectId) => {
 
     try {
-      window.open(`http://localhost:5000/Project-data/${projectId}/pdf`, '_blank');
+      window.open(`${URL}/Project-data/${projectId}/pdf`, '_blank');
     } catch (error) {
       console.error('Error viewing project PDF:', error);
     }
   };
   const handleDelete = async (projectId) => {
     try {
-      const response = await fetch(`http://localhost:5000/send-request/${projectId}`, {
+      const response = await fetch(`${URL}/send-request/${projectId}`, {
         method: 'DELETE'
       });
       if (!response.ok) {

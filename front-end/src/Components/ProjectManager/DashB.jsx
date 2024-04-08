@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PmDashboard from './PmDashboard';
 import PmNavbar from './PmNavbar';
 import './DashB.css'
-
+import { URL } from '../../data';
 
 const DashB = () => {
     const [employeeCount, setEmployeeCount] = useState(0);
@@ -13,7 +13,7 @@ const DashB = () => {
         // Fetch employee count from MongoDB collection
         const fetchEmployeeCount = async () => {
             try {
-                const response = await fetch('http://localhost:5000/employee-count');
+                const response = await fetch(`${URL}/employee-count`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch employee count');
                 }
@@ -27,7 +27,7 @@ const DashB = () => {
         // Fetch project count from MongoDB collection
         const fetchProjectCount = async () => {
             try {
-                const response = await fetch('http://localhost:5000/project-count');
+                const response = await fetch(`${URL}/project-count`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch project count');
                 }
@@ -39,7 +39,7 @@ const DashB = () => {
         };
         const fetchRequestCount = async () => {
             try {
-                const response = await fetch('http://localhost:5000/request-count');
+                const response = await fetch(`${URL}/request-count`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch project count');
                 }
@@ -51,7 +51,7 @@ const DashB = () => {
         };
         const fetchProjects = async () => {
             try {
-                const response = await fetch('http://localhost:5000/Project-data');
+                const response = await fetch(`${URL}/Project-data`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch projects');
                 }
@@ -70,7 +70,7 @@ const DashB = () => {
     const viewProjectPdf = async (projectId) => {
 
         try {
-          window.open(`http://localhost:5000/Project-data/${projectId}/pdf`, '_blank');
+          window.open(`${URL}/Project-data/${projectId}/pdf`, '_blank');
         } catch (error) {
           console.error('Error viewing project PDF:', error);
         }

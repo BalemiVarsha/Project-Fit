@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
-import '../Login.css'
+import '../Login.css';
+import { URL } from '../../data';
 import { Link } from 'react-router-dom';
 const EmpLogin=()=>{
    
@@ -7,7 +8,7 @@ const EmpLogin=()=>{
   const [password, setPassword] = useState('');
   async function admin(event){
       event.preventDefault()
-      const response =await fetch('http://localhost:5000/employeelogin',{
+      const response =await fetch(`${URL}/employeelogin`,{
           method:'POST',
           headers:{
               'Content-Type': 'application/json',

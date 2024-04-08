@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
+import { URL } from '../../data';
 import '../ProjectManager/PmDashboard.css';
 import { GoHome } from "react-icons/go";
 import { BsPersonSquare } from "react-icons/bs";
@@ -17,7 +18,7 @@ const EmpDashboard = () => {
     // Fetch employee count from MongoDB collection
     const fetchEmployeeCount = async () => {
       try {
-        const response = await fetch('http://localhost:5000/employee-count');
+        const response = await fetch(`${URL}/employee-count`);
         if (!response.ok) {
           throw new Error('Failed to fetch employee count');
         }
@@ -31,7 +32,7 @@ const EmpDashboard = () => {
     // Fetch project count from MongoDB collection
     const fetchProjectCount = async () => {
       try {
-        const response = await fetch('http://localhost:5000/project-count');
+        const response = await fetch(`${URL}/project-count`);
         if (!response.ok) {
           throw new Error('Failed to fetch project count');
         }
@@ -44,7 +45,7 @@ const EmpDashboard = () => {
    
     const fetchProjects = async () => {
       try {
-        const response = await fetch('http://localhost:5000/Project-data');
+        const response = await fetch(`${URL}/Project-data`);
         if (!response.ok) {
           throw new Error('Failed to fetch projects');
         }
@@ -63,7 +64,7 @@ const EmpDashboard = () => {
   useEffect(() => {
     const fetchEmployeeData = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/employee-data/${employeeId}`);
+        const response = await fetch(`${URL}/employee-data/${employeeId}`);
         const data = await response.json();
         console.log('Employee Data:', data); // Log the response
         if (!response.ok) {
@@ -79,7 +80,7 @@ const EmpDashboard = () => {
   const viewProjectPdf = async (projectId) => {
 
     try {
-      window.open(`http://localhost:5000/Project-data/${projectId}/pdf`, '_blank');
+      window.open(`${URL}/Project-data/${projectId}/pdf`, '_blank');
     } catch (error) {
       console.error('Error viewing project PDF:', error);
     }

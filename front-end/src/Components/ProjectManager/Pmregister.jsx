@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Pmlogin.css'
+import { URL } from '../../data';
 import { Link } from 'react-router-dom';
 const Pmregister = () => {
     const [username, setUsername] = useState(' ');
@@ -30,7 +31,7 @@ const Pmregister = () => {
         validatePassword();
         if (!usernameError && !passwordError) {
             // Submit the form or call API to register user
-            const response = await fetch('http://localhost:5000/api/projectmanagercreation', {
+            const response = await fetch(`${URL}/api/projectmanagercreation`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

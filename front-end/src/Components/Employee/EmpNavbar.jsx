@@ -1,8 +1,9 @@
 import React, { useEffect,useState } from 'react';
 import { FaSearch, FaBell } from 'react-icons/fa';
+import { URL } from '../../data';
 import '../ProjectManager/PmNavbar.css';
 import io from 'socket.io-client';
-const socket = io.connect("http://localhost:5000");
+const socket = io.connect(`${URL}`);
 
 const EmpNavbar = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -11,7 +12,7 @@ const EmpNavbar = () => {
     const handleSearch = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch('http://localhost:5000/search', {
+            const res = await fetch(`${URL}/search`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ search: searchQuery })

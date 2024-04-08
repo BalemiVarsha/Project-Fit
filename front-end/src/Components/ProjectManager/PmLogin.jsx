@@ -2,7 +2,7 @@ import React ,{useState}from 'react';
 import './Pmlogin.css'
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { URL } from '../../data';
 
 const PmLogin = () => {
 
@@ -10,7 +10,7 @@ const PmLogin = () => {
   const[password,setPassword]=useState(' ');
   async function admin(event){
       event.preventDefault()
-      const response =await fetch('http://localhost:5000/api/projectmanagerlogin',{
+      const response =await fetch(`${URL}/api/projectmanagerlogin`,{
           method:'POST',
           headers:{
               'Content-Type': 'application/json',
