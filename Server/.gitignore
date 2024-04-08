@@ -2,5 +2,5 @@ node_modules
 Test
 coverage
 .nc_output
-uploads
+
 .env
