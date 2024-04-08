@@ -2,7 +2,7 @@
   "name": "front-end",
   "version": "0.1.0",
   "private": true,
- "dependencies": {
+  "dependencies": {
     "aws-sdk": "^2.1588.0",
     "axios": "^1.6.7",
     "bootstrap": "^5.3.3",
@@ -57,5 +57,3 @@
     ]
   }
 }
-
-

@@ -61,23 +61,15 @@ const App=()=> {
        <Route path="/pmdashboard" element={<PmDashboard />} />
        <Route path="/dashboard" element={<DashB />} />
        <Route path="/all-projects" element={<AllProjects />} />
-       {/* <Route path="/update-project" element={<EditProject />} /> */}
        <Route path="/update-project/:projectId" element={<EditProject />} />
        <Route path="/add-projects" element={<AddProjects />} />
        <Route path="/send-request" element={<SentRequest />} />
-       {/* <Route path="/referrals" element={<Referrals />} />
-       */}
-       {/* <Route path="/addemp" element={<AddEmp/>}/> */}
-
-       {/* <Route path="/employeelogin" element={<Login />} /> */}
+      
 {/* 
        ---------------------------------------------------Resource Manager---------------------------------------------------------------------- */}
        <Route path="/admincreation" element={<Admin/>} />
-       {/* <Route path="/adminsucces" element={<AdminSucces/>} /> */}
        <Route path="/adminlogin" element={<AdminLogin />} />
-       {/* <Route path="/dashboard" element={<Dashboard />} /> */}
        <Route path="/rmdashboard" element={<RmDashboard />} />
-       {/* <Route path="/dashdummy" element={<Dashdummy />} /> */}
        <Route path="/manage-employees" element={<ManageEmployee />} />
        <Route path="/addEmployee" element={<AddEmployee />} />
        <Route path="/viewprojects" element={<ViewProject />} />
@@ -86,11 +78,6 @@ const App=()=> {
       <Route path="/projectmanagerRequest" element={<Request/>} />
       <Route path="/update-employee/:employeeId" element={<EditEmp />} />
       <Route path="/resourcemanager" element={<RDashB />} />
-      {/* <Routes>
-        <Route path="/all-projects" element={<AllProjects />} />
-        <Route path="/send-request" element={<SentRequest />} />
-        
-      </Routes> */}
       
        {/* -------------------------------------Employeeee---------------------------------------- */}
        <Route path="/employeelogin" element={<EmpLogin />} />

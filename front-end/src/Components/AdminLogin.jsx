@@ -2,6 +2,7 @@ import React ,{useState}from 'react';
 import './Login.css';
 // import { URL } from '../data';
 import {URL} from '../data'
+// import {Redirect} from 'react-router-dom/cjs/react-router-dom'
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -28,6 +29,7 @@ const AdminLogin = () => {
       if(data.user){
         const token=localStorage.setItem('token',data.user)
         toast.success('Login successful')
+        // return <Redirect to="/resourcemanager"/>
         window.location.href='/resourcemanager'
       }else{
         toast.error("please check your username and password")
