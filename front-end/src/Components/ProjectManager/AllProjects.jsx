@@ -172,13 +172,13 @@ const AllProjects = () => {
                 </ul>
               </div>
               <div className="optionss">
-                {/* <Link to={`/update-project/${project.projectId}`}>
+                <Link to={`/update-project/${project.projectId}`}>
                   <button className="btn btn-outline-success editbtnn">Edit</button>
-                </Link><br/> */}
+                </Link><br/>
                 <button className="btn btn-outline-success deltt" onClick={() => handleDelete(project.projectId)}>Delete</button><br/>
                 {/* <button className="btn btn-outline-success request" onClick={() => handleSendRequest(project)}>Send Request</button> */}
                 {/* <button className="btn btn-outline-success request" onClick={() => { handleSendRequest(project); notify(); }}>Send Request</button> */}
-                {/* <button className="btn btn-outline-success request" onClick={() => { handleSendRequest(project); notify(project.title); }}>Send Request</button> */}
+                <button className="btn btn-outline-success request" onClick={() => { handleSendRequest(project); notify(project.title); }}>Send Request</button>
 
               </div>
             </div>
