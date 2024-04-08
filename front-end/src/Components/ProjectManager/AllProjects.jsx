@@ -127,7 +127,7 @@ const AllProjects = () => {
   
   return (
     <React.Fragment>
-      <RmDashboard />
+      <PmDashboard />
       {/* <PmNavbar/> */}
       <div className="filter-container">
         <div className='filt'>
