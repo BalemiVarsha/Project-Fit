@@ -32,7 +32,7 @@ import { RiLogoutBoxRLine } from "react-icons/ri";
           </Link>
   <ul>
   <li className={id.includes("dashboard") && "test"}>
-      <NavLink to="/dashboard"><GoHome className="icon"/>Dashboard</NavLink>
+      <NavLink to="/projectmanager"><GoHome className="icon"/>Dashboard</NavLink>
     </li>
     <li className={id.includes("add-projects") && "test"}><NavLink to="/add-projects"><TbDeviceIpadDown className="icon"/>Add Project</NavLink>
     </li>

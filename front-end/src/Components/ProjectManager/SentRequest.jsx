@@ -10,7 +10,7 @@ const SendRequest = () => {
   const [projects, setProjects] = useState([]);
   const fetchProjData = async () => {
     try {
-      const response = await fetch(`${URL}Project-data`);
+      const response = await fetch(`${URL}/Project-data`);
       if (!response.ok) {
         throw new Error('Failed to fetch project data');
       }

@@ -82,3 +82,13 @@ const AdminLogin = () => {
 }
 
 export default AdminLogin;
+
+
+
+
+
+
+
+// const notify = (projectTitle) => {
+//   socket.emit("project_message", { message: `You have a new employee request for the project: ${projectTitle}` });
+// };
