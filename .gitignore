@@ -1,0 +1,10 @@
+node_modules
+Test
+coverage
+.nc_output
+uploads
+.env
+
+
+front-end/node_modules
+Server/node_modules
