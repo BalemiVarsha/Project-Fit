@@ -136,7 +136,7 @@ const AllProjects = () => {
   //     socket.emit("send_message",{message:'You have new Employee Request'})
   // }
   const notify = (projectTitle) => {
-    socket.emit("project_message", { message: `You have a new employee request for the project: ${projectTitle}` });
+    socket.emit("resource_message", { message: `You have a new employee request for the project: ${projectTitle}` });
   };
   
   return (
