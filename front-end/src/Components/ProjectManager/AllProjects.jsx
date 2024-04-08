@@ -1,20 +1,11 @@
 import React, { useState, useEffect,useRef } from 'react';
 import io from 'socket.io-client';
-
 import { Link } from 'react-router-dom';
 import PmDashboard from './PmDashboard';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useLocation } from 'react-router-dom';
-
-
 import './AllProjects.css';
-
-
-
-
-
-
 const socket=io.connect("http://localhost:5000")
 
 
@@ -136,7 +127,7 @@ const AllProjects = () => {
   //     socket.emit("send_message",{message:'You have new Employee Request'})
   // }
   const notify = (projectTitle) => {
-    socket.emit("resource_message", { message: `You have a new employee request for the project: ${projectTitle}` });
+    socket.emit("project_message", { message: `You have a new employee request for the project: ${projectTitle}` });
   };
   
   return (
