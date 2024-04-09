@@ -6,7 +6,7 @@ const { euclideanDistance } = require('../helper/pdfComparisonFunctions');
 const {uploadToS3,retrieveFromS3}=require('../middlewares/aws_s3')
 const addProject = async (req, res) => {
   try {
-    const { projectId, title, startDate, endDate, department, description, status } = req.body;
+    const { projectId, title, startDate, endDate, department, description } = req.body;
     const file = req.file;
 
     if (!file || !file.mimetype || !file.mimetype.includes('pdf')) {
@@ -21,7 +21,7 @@ const addProject = async (req, res) => {
       endDate,
       department,
       description,
-      status,
+     
       filePath: {
         local: file.path,
         s3: s3file // Assuming s3file contains the S3 file path

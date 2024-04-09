@@ -28,16 +28,17 @@
 
 .view-pdf-buttonn button{
   position: absolute;
-  background-color: #007bff;
- height:5vh;
+  background-color:  #7216fc;
+  height:5vh;
+  width: 15%;
   color:white;
-  border-color: #1c8df0;
+  border-color: #7216fc;
   top: 10vh;
-  left: 55vh;
+  left: 50vh;
 }
 .view-pdf-buttonn button:hover {
-  background-color: #0a7ac0;
-  border-radius: 5px;
+
+  border-radius: 10px;
 }
 
 .optionss {
@@ -48,20 +49,55 @@
 }
 
 .editbtn,
-.delt,
-.sendreqq {
+.deltt,
+.request {
   margin-top: 16px;
 }
-.editbtn{
-  background-color: #fec045;
-  background-color:  #7f42e1f1;
-  color:white
+
+.optionss{
+  top: 8vh;
 }
-.sendreqq {
-  background-color: rgb(136, 194, 49);
-  background-color:  #7f42e1f1;
+.bb{
+  margin-top: 16px;
+  box-shadow: 1 0 20px rgba(1, 0, 0, 0.1);
+}
+.employee{
+  border: 1px solid #ccc;
+position: relative;
+  padding-left: 3vh;
+  padding-top: 3vh;
+}
+.resumee{
+  position: absolute;
+  background-color: #7216fc;
+  height:5vh;
   color:white;
+  border-color: #7216fc;
+ top:10vh;
+  margin-left: 46vh;
 }
-.editbtn:hover {
-  background-color: #7f42e1f1; /* Background color on hover */
+.empresume{
+  position: absolute;
+  background-color: #7216fc;
+  margin-left: 70vh;
+  top:5vh;
+}
+.filter-container{
+margin-top: 0px;
+  background-color: #7216fc;
+ display:flex;
+height: 5vh;
+
+}
+.filt{
+ 
+    margin-left: 27%;
+    font-weight:bolder;
+    padding-top: 1vh;
+    position :flex;
+    font-size: 17px;
+    color:white
+}
+.filter option{
+  margin-left: 20px;
 }

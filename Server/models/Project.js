@@ -28,10 +28,10 @@ const projectSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  status: {
-    type: String,
-    required: true
-  },
+  // status: {
+  //   type: String,
+  //   required: true
+  // },
   filePath: {
     local: {
       type: String, // Assuming local file path is a string

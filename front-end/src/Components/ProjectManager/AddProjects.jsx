@@ -17,21 +17,77 @@ const AddProjects = () => {
     endDate: '',
     department: '',
     description: '',
-    status:'',
     file:null
   });
 
+  const [errors, setErrors] = useState({
+    title: '',
+    startDate: '',
+    endDate: '',
+    department: '',
+    description: '',
+    file:null
+  });
   const handleChange = (e) => {
-    const { name, value ,files } = e.target;
+    const { name, value, files } = e.target;
     let updatedValue = value;
-
-  if (name === "startDate"|| name === "endDate") {
-    const date = new Date(value);
-    updatedValue = date.toISOString().split('T')[0]; // Extract only the date part
-  }
-
-  setProject({ ...project, [name]: value, file: files ? files[0] : null }); // Update file state if present
+    let error = '';
+  
+    switch (name) {
+      case 'title':
+        error = value.trim() === '' ? 'Title is required' : '';
+        break;
+        case 'startDate':
+          error = value.trim() === '' ? 'Start date is required' : '';
+          if (value !== '' && project.endDate !== '') {
+            const startDate = new Date(value);
+            const endDate = new Date(project.endDate);
+            if (startDate >= endDate) {
+              error = 'Start date must be before end date';
+            }
+          }
+          break;
+        case 'endDate':
+          error = value.trim() === '' ? 'End date is required' : '';
+          if (value !== '' && project.startDate !== '') {
+            const startDate = new Date(project.startDate);
+            const endDate = new Date(value);
+            if (endDate <= startDate) {
+              error = 'End date must be after start date';
+            }
+          }
+          break;
+      case 'department':
+        error = value === '' ? 'Department is required' : '';
+        break;
+      case 'status':
+        error = value === '' ? 'Status is required' : '';
+        break;
+      case 'description':
+        error = value.trim() === '' ? 'Description is required' : '';
+        break;
+      case 'file':
+        error = files && files.length === 0 ? 'File is required' : '';
+        break;
+      default:
+        break;
+    }
+  
+    setErrors({ ...errors, [name]: error });
+    setProject({ ...project, [name]: value, file: files ? files[0] : null });
   };
+  
+  // const handleChange = (e) => {
+  //   const { name, value ,files } = e.target;
+  //   let updatedValue = value;
+
+  // if (name === "startDate"|| name === "endDate") {
+  //   const date = new Date(value);
+  //   updatedValue = date.toISOString().split('T')[0]; // Extract only the date part
+  // }
+
+  // setProject({ ...project, [name]: value, file: files ? files[0] : null }); // Update file state if present
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem('token');
@@ -96,8 +152,8 @@ const AddProjects = () => {
                 name="title"
                 value={project.title}
                 onChange={handleChange}
-              />
-            </div>
+                 />{errors.title && <p className="text-danger">{errors.title}</p>}
+                </div>
             <div className="col-12">
               <label htmlFor="startDate" className="form-label">
                 Start Date:
@@ -109,7 +165,7 @@ const AddProjects = () => {
                 name="startDate"
                 value={project.startDate}
                 onChange={handleChange}
-              />
+              />{errors.startDate && <p className="text-danger">{errors.startDate}</p>}
             </div>
             <div className="col-12">
               <label htmlFor="endDate" className="form-label">
@@ -122,7 +178,7 @@ const AddProjects = () => {
                 name="endDate"
                 value={project.endDate}
                 onChange={handleChange}
-              />
+              />{errors.endDate && <p className="text-danger">{errors.endDate}</p>}
             </div>
             <div className="col-12">
               <label htmlFor="inputDepartment" className="form-label">
@@ -139,8 +195,9 @@ const AddProjects = () => {
                 <option value="Finance">Finance</option>
                 <option value="CustomerService">Customer Service</option>
                 <option value="AccountManagement">Account Management</option>
-              </select>
-            </div> <div className="col-12">
+              </select>{errors.department && <p className="text-danger">{errors.department}</p>}
+            </div> 
+            {/* <div className="col-12">
               <label htmlFor="inputDepartment" className="form-label">
                 Status
               </label>
@@ -152,7 +209,7 @@ const AddProjects = () => {
               >
                 <option value="">Set Project Status</option>
                 <option value="Assigned">Reffered</option>
-                <option value="Not Assigned">Not Reffered</option></select></div>
+                <option value="Not Assigned">Not Reffered</option></select></div> */}
             <div className="col-12">
               <label htmlFor="description" className="form-label">
                 Project Description:
@@ -165,7 +222,7 @@ const AddProjects = () => {
                 rows="3"
                 value={project.description}
                 onChange={handleChange}
-              />
+              />{errors.description && <p className="text-danger">{errors.description}</p>}
             </div>
             <div className="col-12">
               <label htmlFor="file" className="form-label">
@@ -178,7 +235,7 @@ const AddProjects = () => {
                 name="file"
                 accept=".pdf"
                 onChange={handleChange}
-              />
+              />{errors.file && <p className="text-danger">{errors.file}</p>}
             </div>
             <div className="col-12">
               <button type="submit" className="editt">

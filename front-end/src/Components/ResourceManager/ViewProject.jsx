@@ -6,9 +6,7 @@ import './ViewProject.css';
 
 const ViewProjects = () => {
   const [projects, setProjects] = useState([]);
-
   const [filter, setFilter] = useState('all');
-  
   const [searchQuery, setSearchQuery] = useState('');
   const location = useLocation(); 
   const highlightedContentRef = useRef(null);// Default filter: all projects
@@ -140,7 +138,7 @@ const ViewProjects = () => {
               <div className="project-details">
                 {/* <h3>{project.title}</h3> */}
                 <h3 dangerouslySetInnerHTML={{ __html: project.title }}></h3>
-                <div className="view-pdf-button">
+                <div className="view-pdf-buttonn">
                   <button onClick={() => viewProjectPdf(project.projectId)}>View PDF</button>
                 </div>
                 <p><strong>Start Date:</strong> {splitDateByT(project.startDate)}</p>
@@ -229,7 +227,6 @@ export default ViewProjects;
 // const notify = (projectTitle) => {
 //   socket.emit("project_message", { message: `You have a new employee request for the project: ${projectTitle}` });
 // };
-
 
 
 
