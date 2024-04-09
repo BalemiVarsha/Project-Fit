@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
-import { URL } from '../data';
-import './Login.css'
+import { URL } from '../../data';
+import '../Login.css'
 const Admin=()=>{
     
     const [username, setUsername] = useState(' ');

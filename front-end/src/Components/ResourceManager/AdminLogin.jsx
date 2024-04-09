@@ -1,7 +1,7 @@
 import React ,{useState}from 'react';
-import './Login.css';
+import '../Login.css';
 // import { URL } from '../data';
-import {URL} from '../data'
+import {URL} from '../../data'
 import { useNavigate } from 'react-router-dom';
 // import {Redirect} from 'react-router-dom/cjs/react-router-dom'
 import { toast, ToastContainer } from 'react-toastify';

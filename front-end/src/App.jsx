@@ -4,7 +4,7 @@ import { BrowserRouter as Router,Route,Routes} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 // import Login from './Components/Login';
-import AdminLogin from './Components/AdminLogin';
+import AdminLogin from './Components/ResourceManager/AdminLogin';
 
 import  ManageEmployee  from './Components/ResourceManager/ManageEmployee';
 import AddEmployee from './Components/ResourceManager/AddEmployee';
@@ -14,7 +14,7 @@ import AllProjects from './Components/ProjectManager/AllProjects';
 import AddProjects from './Components/ProjectManager/AddProjects';
 import AssignProjects from './Components/ResourceManager/AssignProjects';
 
-import Admin from './Components/Admin';
+import Admin from './Components/ResourceManager/Admin';
 
 import Pmregister from './Components/ProjectManager/Pmregister';
 import PmLogin from './Components/ProjectManager/PmLogin';
