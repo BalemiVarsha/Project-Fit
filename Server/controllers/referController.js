@@ -31,7 +31,7 @@ const refEmployees = async (req, res) => {
       res.status(200).json({ message: 'Data received successfully' });
   } catch (error) {
       // Handle any errors
-      console.error('Error referring data:', error);
+     // console.error('Error referring data:', error);
       res.status(500).json({ error: 'Internal server error' });
   }
 };

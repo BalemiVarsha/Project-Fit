@@ -5,31 +5,24 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 // import Login from './Components/Login';
 import AdminLogin from './Components/ResourceManager/AdminLogin';
-
 import  ManageEmployee  from './Components/ResourceManager/ManageEmployee';
 import AddEmployee from './Components/ResourceManager/AddEmployee';
-
 import SkillGap from './Components/SkillGap';
 import AllProjects from './Components/ProjectManager/AllProjects';
 import AddProjects from './Components/ProjectManager/AddProjects';
 import AssignProjects from './Components/ResourceManager/AssignProjects';
-
 import Admin from './Components/ResourceManager/Admin';
-
 import Pmregister from './Components/ProjectManager/Pmregister';
 import PmLogin from './Components/ProjectManager/PmLogin';
 import PmDashboard from './Components/ProjectManager/PmDashboard';
-
 import RmDashboard from './Components/ResourceManager/RmDashboard';
 import Select from './Components/Select';
-
 import ViewProject from './Components/ResourceManager/ViewProject';
 import Request from './Components/ResourceManager/Request'
 import SentRequest from './Components/ProjectManager/SentRequest';
 import DashB from './Components/ProjectManager/DashB';
 import EditProject from './Components/ProjectManager/EditProject'
 import EditEmp from './Components/ResourceManager/EditEmp';
-// import Referrals from './Components/ProjectManager/Referrals';
 import RDashB from './Components/ResourceManager/RDashB';
 import Create from './Components/Create';
 import EmpLogin from './Components/Employee/EmpLogin'

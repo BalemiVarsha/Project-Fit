@@ -21,10 +21,9 @@ const addProject = async (req, res) => {
       endDate,
       department,
       description,
-     
       filePath: {
         local: file.path,
-        s3: s3file // Assuming s3file contains the S3 file path
+        s3: s3file 
       }
     });
     
@@ -179,6 +178,7 @@ const postSearch = async (req, res) => {
 
 
 const calculateScoreController = async (req, res) => {
+  console.log("hi");
   try {
     const { department, title } = req.query;
 
@@ -205,7 +205,7 @@ const calculateScoreController = async (req, res) => {
       scores.push({ employeeId, score });
     }
 
-    console.log('Scores:', scores);
+    // console.log('Scores:', scores);
     res.json({ scores });
   } catch (error) {
     console.error('Error calculating scores:', error);
@@ -223,11 +223,11 @@ async function getProjectPdf(req, res) {
    
     console.log("1----")
     const fileData = await retrieveFromS3(projectId);
-
+  
     // Set Content-Type header
     res.setHeader('Content-Type', 'application/pdf');
-    console.log("2----")
-    // Send the file data
+   
+    // Send the file data`
     res.write(fileData);
     res.end();
   } catch (error) {

@@ -64,7 +64,7 @@ import RmNavbar from './RmNavbar';
          formData.append('department', employeeDetails.department);
          formData.append('selectedOption', employeeDetails.selectedOption);
          formData.append('status', employeeDetails.status);
-        //  formData.append('resume', employeeDetails.resume);
+         formData.append('resume', employeeDetails.resume);
     
           const response = await fetch(`${URL}/update-employee/${employeeId}`, {
             method: 'PUT',
@@ -218,7 +218,7 @@ import RmNavbar from './RmNavbar';
                 <option value="Not Assigned">Not Assigned</option>
                
               </select></div>
-            {/* <div className="col-12 mb-3">
+            <div className="col-12 mb-3">
               <label className="form-label" htmlFor="resume">
                 Select Resume
               </label>
@@ -229,7 +229,7 @@ import RmNavbar from './RmNavbar';
                 name="resume"
                 onChange={handleFileChange}
               />
-            </div> */}
+            </div>
             {/* Submit button */}
             <div className="col-12">
               <button type="submit" className="editt">

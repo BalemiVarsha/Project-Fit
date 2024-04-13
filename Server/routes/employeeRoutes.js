@@ -31,7 +31,7 @@ router.get('/department',getDepartments);
 router.get('/employee-data/:employeeId', getEmployeeDetails);
 router.post('/api/addEmployee', upload.single('resume'),authenticateToken, addEmployee);
 router.get('/employee-data/:employeeId/pdf',getEmployeeResumePDF)
-router.put('/update-employee/:employeeId', upload.single('file'),updateEmployee);
+router.put('/update-employee/:employeeId', upload.single('resume'),updateEmployee);
 router.delete('/employee-data/:employeeId', deleteEmployee);
 router.post('/searchemployee',authenticateToken,empSearch)
 
@@ -39,6 +39,9 @@ module.exports = router;
 
 
 
+
+//2038
+//1109
 
 
 

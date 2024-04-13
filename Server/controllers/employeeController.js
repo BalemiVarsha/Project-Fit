@@ -138,48 +138,52 @@ const getEmployeeData = async (req, res) => {
   }
 };
 
+
 const updateEmployee = async (req, res) => {
-  const {employeeId}=req.params;
-  const { name, email, phone, designation, department, selectedOption,status } = req.body;
+  const { employeeId } = req.params;
+  const { name, email, phone, designation, department, selectedOption, status } = req.body;
+  let resumePath = '';
 
-   try{
-      let employee=await Employee.findOne({employeeId});
-      if(!employee){
-          return res.status(404).json({ message: 'Employee not found' });
+  try {
+    let employee = await Employee.findOne({ employeeId });
+    if (!employee) {
+      return res.status(404).json({ message: 'Employee not found' });
+    }
+
+    // Check if a file has been uploaded
+    if (req.file) {
+      // Handle file upload
+      resumePath = req.file.path; // Assuming req.file.path contains the new file path
+      
+      // If there was a previous file path, delete it here
+      if (employee.resume) {
+        // Delete previous file using fs.unlink or your file system's equivalent method
+        // Example:
+        // fs.unlinkSync(employee.resume);
       }
+    }
 
-    employee.name=name;
-    employee.email=email;
-    employee.phone=phone;
-    employee.designation=designation;
-    employee.department=department;
-    employee.selectedOption=selectedOption;
-    employee.status=status;
+    // Update employee details
+    employee.name = name;
+    employee.email = email;
+    employee.phone = phone;
+    employee.designation = designation;
+    employee.department = department;
+    employee.selectedOption = selectedOption;
+    employee.status = status;
+    if (resumePath) {
+      employee.resume = resumePath;
+    }
 
-  //   if (req.file) {
-  //     const file = employee.file; // Get the current file path
-  //     if (resume) {
-  //         // If there's a previous file, delete it
-  //         fs.unlinkSync(file);
-  //     }
-  //     // Save the new file path
-  //     employee.file = req.file.path;
-  // }
-   
+    await employee.save();
 
-  await employee.save();
-
-  res.status(200).json({ message: 'Employee updated successfully', employee });
-   }catch(error){
-
-      console.error('Error updating employee details:', error);
-      res.status(500).json({ message: 'Failed to update employee' });
-        
-
-
-   }
-
+    res.status(200).json({ message: 'Employee updated successfully', employee });
+  } catch (error) {
+    console.error('Error updating employee details:', error);
+    res.status(500).json({ message: 'Failed to update employee' });
+  }
 }
+
 
 const getEmployeeResumePDF = async (req, res) => {
   try {

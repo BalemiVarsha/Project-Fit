@@ -27,6 +27,20 @@ router.post('/search',authenticateToken,postSearch);
 router.get('/Project-data/:projectId/pdf',getProjectPdf);
 
 router.post('/calculate-score', calculateScoreController);
+
+module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
 // router.get('/Project-data/:projectId/pdf', async (req, res) => {
 //   try {
 //     const projectId = req.params.projectId;
@@ -50,32 +64,6 @@ router.post('/calculate-score', calculateScoreController);
 //     res.status(500).json({ message: 'Internal server error' });
 //   }
 // });
-module.exports = router;
-
-
-
-
-
-
-
-
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, 'uploads/'); // Dest folder for storing uploads
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, file.originalname); 
-//   }
-// });
-
-// const upload = multer({ storage: storage});
-
-
-
-
-
-
-
 
 
 
