@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import PmDashboard from './PmDashboard';
-import PmNavbar from './PmNavbar';
 import './DashB.css'
 import { URL } from '../../data';
 
