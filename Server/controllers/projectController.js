@@ -178,7 +178,7 @@ const postSearch = async (req, res) => {
 
 
 const calculateScoreController = async (req, res) => {
-  console.log("hi");
+  // console.log("hi");
   try {
     const { department, title } = req.query;
 
@@ -224,7 +224,7 @@ async function getProjectPdf(req, res) {
     console.log("1----")
     const fileData = await retrieveFromS3(projectId);
   
-    // Set Content-Type header
+   
     res.setHeader('Content-Type', 'application/pdf');
    
     // Send the file data`

@@ -101,7 +101,6 @@ const deleteEmployee = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
-// Assuming you have an Employee model defined in your backend
 
 
 

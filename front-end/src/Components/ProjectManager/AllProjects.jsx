@@ -74,8 +74,8 @@ const AllProjects = () => {
     if (searchQuery) {
       const highlightedContent = document.querySelector('.highlighted-content');
       if (highlightedContent) {
-        highlightedContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+        highlightedContent.scrollIntoView({ behavior: 'auto', block: 'start' });
+      }   
     }
   };
   const viewProjectPdf = async (projectId) => {
@@ -125,9 +125,7 @@ const AllProjects = () => {
       console.error('Error deleting project:', error);
     }
   };
-  // const notify=()=>{
-  //     socket.emit("send_message",{message:'You have new Employee Request'})
-  // }
+
 const notify = (projectTitle) => {
   socket.emit("project_message", { message: `You have a new employee request for the project: ${projectTitle}` });
 };
