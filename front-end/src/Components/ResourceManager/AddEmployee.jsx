@@ -21,7 +21,7 @@ const AddEmployee = () => {
     status:'',
     resume:null,
   });
-
+ 
   // const handleChange = (e) => {
   //   const { name, value } = e.target;
   //   setEmployee({ ...employee, [name]: value });
@@ -37,6 +37,7 @@ const AddEmployee = () => {
 
 
   const [errors, setErrors] = useState({
+
     name: '',
     email: '',
     password:'',
@@ -112,7 +113,15 @@ const AddEmployee = () => {
       formData.append('status', employee.status);
       formData.append('resume', employee.resume);
 
-      const response = await fetch(`${URL}/api/addEmployee`, {
+      // const response = await fetch(`${URL}/api/addEmployee`, {
+      //   method: 'POST',
+      //   body: formData,
+      //   headers:{
+         
+      //     'Authorization': `Bearer ${token}`
+      // },
+      // });
+      const response = await fetch(`http://demo.darwinboxlocal.com/employee/addemployee`, {
         method: 'POST',
         body: formData,
         headers:{

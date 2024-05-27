@@ -37,7 +37,8 @@ const AssignProjects = () => {
 
   const fetchTitlesFromDatabase = async () => {
     try {
-      const response = await fetch(`${URL}/titles`);
+      // const response = await fetch(`${URL}/titles`);
+      const response = await fetch(`http://demo.darwinboxlocal.com/ProjectRequest/Getdistincttitles`);
       if (response.ok) {
         const data = await response.json();
         setTitles(data.titles);
@@ -51,7 +52,8 @@ const AssignProjects = () => {
 
   const fetchDepartmentsFromDatabase = async () => {
     try {
-      const response = await fetch(`${URL}/department`);
+      // const response = await fetch(`${URL}/department`);
+      const response = await fetch(`http://demo.darwinboxlocal.com/employee/departments`);
       if (response.ok) {
         const data = await response.json();
         setDepartments(data.departments);
@@ -65,14 +67,16 @@ const AssignProjects = () => {
   const viewProjectPdf = async (projectId) => {
 
     try {
-      window.open(`${URL}/Project-data/${projectId}/pdf`, '_blank');
+      // window.open(`${URL}/Project-data/${projectId}/pdf`, '_blank');
+      window.open(`http://demo.darwinboxlocal.com/project/getprojectpdf?projectId=${projectId}`,'_blank')
     } catch (error) {
       console.error('Error viewing project PDF:', error);
     }
   };
   const handleViewResume = async (employeeId) => {
     try {
-      window.open(`${URL}/employee-data/${employeeId}/pdf`, '_blank');
+      // window.open(`${URL}/employee-data/${employeeId}/pdf`, '_blank');
+      window.open(`http://demo.darwinboxlocal.com/employee/getemployeepdf?employeeId=${employeeId}`, '_blank')
     } catch (error) {
       console.error('Error viewing project PDF:', error);
     }
@@ -80,7 +84,7 @@ const AssignProjects = () => {
 
   const fetchProjectDetails = async (title) => {
     try {
-      const response = await fetch(`${URL}/project?title=${title}`);
+      const response = await fetch(`http://localhost:5000/project?title=${title}`);
       if (response.ok) {
         const data = await response.json();
         setProjectDetails(data);
@@ -96,13 +100,12 @@ const AssignProjects = () => {
 
   const fetchEmpoyeeDetails = async (department) => {
     try {
-      const response = await fetch(`${URL}/employee-data?department=${department}`);
+      const response = await fetch(`http://localhost:5000/employee-data?department=${department}`);
       if (response.ok) {
         const data = await response.json();
         setDepartmentEmployees(data);
         // Automatically fetch employee resume when department is selected
         fetchEmployeeResume(data[0]._id); // Assuming first employee in the list
-        
       } else {
         throw new Error('Failed to fetch employees');
       }
@@ -110,10 +113,11 @@ const AssignProjects = () => {
       console.error('Error fetching employees:', error);
     }
   };
+  
 
   const fetchProjectPDF = async (projectId) => {
     try {
-      const response = await fetch(`${URL}/Project-data/${projectId}/pdf`);
+      const response = await fetch(`http://demo.darwinboxlocal.com/project/getprojectpdf?projectId=${projectId}`);
       if (response.ok) {
         const blob = await response.blob();
         setProjectPDF(blob);
@@ -127,7 +131,7 @@ const AssignProjects = () => {
 
   const fetchEmployeeResume = async (employeeId) => {
     try {
-      const response = await fetch(`${URL}/employee-data/${employeeId}/pdf`);
+      const response = await fetch(`http://demo.darwinboxlocal.com/employee/getemployeepdf?employeeId=${employeeId}`)
       if (response.ok) {
         const blob = await response.blob();
         setEmployeeResume(blob);
@@ -162,24 +166,31 @@ const AssignProjects = () => {
 
   // got for individual employee---------------------------------------------------------------------------------------------------
   const handleViewScore = async () => {
-
     if (selectedTitle && selectedDepartment) {
       try {
-        const response = await fetch(`${URL}/calculate-score?department=${selectedDepartment}&title=${selectedTitle}`, {
+        const response = await fetch(`http://demo.darwinboxlocal.com/project/calScore?department=${selectedDepartment}&title=${selectedTitle}`, {
           method: 'POST'
         });
-
+       
+        console.log(response)
         if (response.ok) {
           const data = await response.json();
-          console.log('Similarity Scores:', data.scores);
+          
+          console.log('Response Data:', data);
+          const scores = data['cosine scores'];
+          if (Array.isArray(scores)) { // Check if scores is an array
+            console.log('Similarity Scores:', scores);
 
-          // Loop through each employee to generate a chart
-          departmentEmployees.forEach(employee => {
-            const employeeScores = data.scores.find(score => score.employeeId === employee._id);
-            if (employeeScores) {
-              generateChart(employee._id, employeeScores.score, employeeScores.difference);
-            }
-          });
+            // Loop through each employee to generate a chart
+            departmentEmployees.forEach(employee => {
+              const employeeScores = scores.find(score => score.employeeId === employee.employeeId);
+              if (employeeScores) {
+                generateChart(employee._id, employeeScores.score, employeeScores.difference);
+              }
+            });
+          } else {
+            console.error('Invalid format for similarity scores:', scores);
+          }
         } else {
           console.error('Failed to calculate scores for department:', selectedDepartment);
         }
@@ -189,7 +200,7 @@ const AssignProjects = () => {
     } else {
       console.error('Please select project and department to calculate scores');
     }
-  };
+};
 
   const generateChart = (employeeId, score) => {
     const canvasId = `chart-${employeeId}`;
@@ -295,7 +306,12 @@ const AssignProjects = () => {
       });
   };
   const splitDateByT = (date) => {
-    return date.split('T')[0];
+    // console.log('Date:', date);
+    if (date) {
+      return date.split('T')[0];
+    } else {
+      return ''; // or any default value you want to return when date is undefined
+    }
   };
   const notify = (selectedTitle) => {
     socket.emit("resource_message", { message: `Employees are referred to the project ${selectedTitle}` });
@@ -373,7 +389,7 @@ const AssignProjects = () => {
           </div>
 
 
-          <p><button className='resume' onClick={() => handleViewResume(employee._id)}> Resume </button> </p>
+          <p><button className='resume' onClick={() => handleViewResume(employee.employeeId)}> Resume </button> </p>
 
 
 

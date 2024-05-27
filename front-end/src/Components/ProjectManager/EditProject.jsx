@@ -15,34 +15,42 @@ const UpdateProjects = () => {
     endDate: '',
     department: '',
     description: '',
-   filePath: null
+   filePath: ''
   });
 
 
   useEffect(() => {
     const fetchProjectDetails = async () => {
       try {
-        const response = await fetch(`${URL}/Project-data/${projectId}`);
+        console.log(`Fetching project details for ID: ${projectId}`);
+        const response = await fetch(`http://demo.darwinboxlocal.com/project/projectbyid?id=${projectId}`);
         if (!response.ok) {
           throw new Error('Failed to fetch project details');
         }
         const data = await response.json();
-  
-        // Convert the date strings received from the API into the required format
-        const formattedStartDate = new Date(data.startDate).toISOString().split('T')[0];
-        const formattedEndDate = new Date(data.endDate).toISOString().split('T')[0];
-  
-        setProjectDetails({
-          ...data,
-          startDate: formattedStartDate,
-          endDate: formattedEndDate
-        });
-       
+    
+        const project = data.success;
+    
+        if (project && !Array.isArray(project)) {
+          // Ensure dates are in the correct format
+          const formattedStartDate = project.startDate ? new Date(project.startDate).toISOString().split('T')[0] : '';
+          const formattedEndDate = project.endDate ? new Date(project.endDate).toISOString().split('T')[0] : '';
+    
+          setProjectDetails({
+            ...project,
+            startDate: formattedStartDate,
+            endDate: formattedEndDate,
+          });
+        } else {
+          console.error('Unexpected data format:', project);
+          toast.error('Unexpected data format received.');
+        }
       } catch (error) {
         console.error('Error fetching project details:', error);
-       
+        toast.error('Error fetching project details.');
       }
     };
+    
   
     fetchProjectDetails();
   }, [projectId]);
@@ -87,12 +95,16 @@ const UpdateProjects = () => {
       formData.append('department', projectDetails.department);
       formData.append('description', projectDetails.description);
       formData.append('filePath', projectDetails.filePath);
-
-      const response = await fetch(`${URL}/update-project/${projectId}`, {
-        method: 'PUT',
+// console.log(projectId)
+      // const response = await fetch(`${URL}/update-project/${projectId}`, {
+      //   method: 'POST',
+      //   body: formData
+      // });
+      const response = await fetch(`http://demo.darwinboxlocal.com/project/updateproject?id=${projectId}`, {
+        method: 'POST',
         body: formData
       });
-
+      console.log(projectId)
       if (response.ok) {
         console.log('Project details updated successfully.');
         toast.success('Project updated successfully.');
@@ -115,7 +127,7 @@ const UpdateProjects = () => {
 
       <div className="d-flex justify-content-center align-items-center mt-3">
         <div className="p-3 rounded w-50 border set">
-          <h3 className="text-center">Add Project</h3>
+          <h3 className="text-center">Edit Project</h3>
           <form className="row g-1" onSubmit={handleSubmit}>
             <div className="col-12">
               <label htmlFor="inputName" className="form-label">
@@ -198,6 +210,7 @@ const UpdateProjects = () => {
                 id="file"
                 name="file"
                 accept=".pdf"
+                value={projectDetails.filePath}
                 onChange={handleChange}
               />
             </div>

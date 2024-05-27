@@ -107,14 +107,24 @@ const AddProjects = () => {
       formData.append('description', project.description);
       formData.append('status', project.status);
 
-      const response = await fetch(`${URL}/api/add-projects`, {
+      // const response = await fetch(`${URL}/api/add-projects`, {
+      //   method: 'POST',
+      //   body: formData, 
+      //   headers:{
+         
+      //     'Authorization': `Bearer ${token}`
+      // },
+      // } 
+      // );
+      const response = await fetch(`http://demo.darwinboxlocal.com/project/addproject`, {
         method: 'POST',
         body: formData, 
         headers:{
          
           'Authorization': `Bearer ${token}`
       },
-      });
+      } 
+      );
 
       if (!response.ok) {
         throw new Error('Failed to add project');

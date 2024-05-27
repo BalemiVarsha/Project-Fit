@@ -62,33 +62,64 @@ module.exports = { euclideanDistance };
 
 
 
+// const PDFParser = require('pdf-parse');
+// const fs = require('fs');
+// const natural = require('natural');
 
-// Function to parse PDF content using pdf-parse library
-// async function parsePDFContent(pdfContent) {
-//   try {
-//     const data = await PDFParser(pdfContent);
-//     return data.text;
-//   } catch (error) {
-//     console.error('Error parsing PDF content:', error);
-//     throw new Error('Error parsing PDF content');
-//   }
-// }
-// function cosineSimilarity(textA, textB) {
+// // Create a tokenizer and stemmer
+// const tokenizer = new natural.WordTokenizer();
+// const stemmer = natural.PorterStemmer;
+
+// // Function to preprocess text
+// function preprocess(text) {
 //   // Tokenize the text into words
-//   const wordsA = textA.toLowerCase().match(/\b\w+\b/g);
-//   const wordsB = textB.toLowerCase().match(/\b\w+\b/g);
-//   // Count term frequencies
-//   const tfA = calculateTermFrequency(wordsA);
-//   const tfB = calculateTermFrequency(wordsB);
-//   // Calculate dot product
-//   let dotProduct = 0;
-//   for (const term in tfA) {
-//     if (term in tfB) {
-//       dotProduct += tfA[term] * tfB[term];
-//     }
+//   const words = tokenizer.tokenize(text.toLowerCase());
+//   // Remove stop words
+//   const stopWords = new Set(['the', 'and', 'of', 'a', 'in', 'to', 'is', 'that', 'it', 'on', 'for', 'with', 'as']);
+//   const filteredWords = words.filter(word => !stopWords.has(word));
+//   // Stem the words
+//   const stemmedWords = filteredWords.map(word => stemmer.stem(word));
+//   // Join the words back into a single string
+//   return stemmedWords.join(' ');
+// }
+
+// // Function to calculate similarity percentage using Euclidean distance
+// async function euclideanDistance(pdfContent1, pdfContent2) {
+//   // Read the contents of the PDF files
+//   const textA = preprocess(fs.readFileSync(pdfContent1, 'utf-8'));
+//   const textB = preprocess(fs.readFileSync(pdfContent2, 'utf-8'));
+
+//   // Calculate Euclidean distance between preprocessed texts
+//   const distance = euclidean(textA, textB);
+
+//   // Convert Euclidean distance to similarity percentage
+//   const similarityPercentage = (1 / (1 + distance)) * 100;
+//   return similarityPercentage.toFixed(2); // Round to 2 decimal places
+// }
+
+// // Function to calculate Euclidean distance between two vectors
+// function euclidean(vec1, vec2) {
+//   let sumSquaredDiff = 0;
+//   const vec1Words = vec1.split(' ');
+//   const vec2Words = vec2.split(' ');
+
+//   // Create a set of all unique words
+//   const allWords = new Set([...vec1Words, ...vec2Words]);
+
+//   // Calculate squared differences for each word
+//   for (const word of allWords) {
+//     const countVec1 = vec1Words.filter(w => w === word).length;
+//     const countVec2 = vec2Words.filter(w => w === word).length;
+//     sumSquaredDiff += Math.pow(countVec1 - countVec2, 2);
 //   }
 
+//   // Calculate the Euclidean distance
+//   return Math.sqrt(sumSquaredDiff);
+// }
 
+// module.exports = { euclideanDistance };
+
+//try 2
 
 
 // Function to calculate similarity score using cosine similarity

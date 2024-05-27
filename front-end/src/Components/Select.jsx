@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, NavLink } from 'react-router-dom';
 import './Select.css'
 const Select = () => {
+
   return (
    <React.Fragment>
      {/* <img  src="/images/pf1.png" alt="Project Fit" /> */}
@@ -15,6 +16,7 @@ const Select = () => {
          <form >
              <div className='formm'>
                 <h1>Login As</h1>
+                
                <NavLink to='/adminlogin'> <button>Resource Manager</button></NavLink> <br></br>
                 <NavLink to='/projectmanagerlogin'><button>Project Manager</button></NavLink> 
                 <NavLink to='/employeelogin'><button>Employee</button></NavLink> 

@@ -14,7 +14,7 @@ const ManageEmployee = () => {
 
   useEffect(() => {
     fetchEmployeeData();
-  }, [searchQuery,employees]);
+  }, [searchQuery]);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -24,19 +24,28 @@ const ManageEmployee = () => {
 
   const fetchEmployeeData = async () => {
     try {
-      const response = await fetch(`${URL}/employee-data`);
+      // const response = await fetch(`${URL}/employee-data`);
+      const response=await fetch(`http://demo.darwinboxlocal.com/employee/displayemployee`)
+
       if (!response.ok) {
         throw new Error('Failed to fetch employee data');
       }
       const data = await response.json();
-      setEmployees(data);
+      // console.log(typeof data);
+      // setEmployees(data);
+      if (data.employees && Array.isArray(data.employees)) {
+        setEmployees(data.employees);
+      } else {
+        console.error('Invalid employee data format:', data);
+      }
     } catch (error) {
       console.error('Error fetching employee data:', error);
     }
   };
   const handleViewResume = async (employeeId) => {
     try {
-      window.open(`${URL}/employee-data/${employeeId}/pdf`, '_blank');
+      // window.open(`${URL}/employee-data/${employeeId}/pdf`, '_blank');
+      window.open(`http://demo.darwinboxlocal.com/employee/getemployeepdf?employeeId=${employeeId}`, '_blank');
     } catch (error) {
       console.error('Error viewing project PDF:', error);
     }
@@ -48,7 +57,10 @@ const ManageEmployee = () => {
   };
   const handleDelete = async (employeeId) => {
         try {
-          const response = await fetch(`${URL}/employee-data/${employeeId}`, {
+          // const response = await fetch(`${URL}/employee-data/${employeeId}`, {
+          //   method: 'DELETE'
+          // });
+          const response = await fetch(`http://demo.darwinboxlocal.com/employee/deleteemployee?id=${employeeId}`, {
             method: 'DELETE'
           });
           if (!response.ok) {
@@ -62,22 +74,40 @@ const ManageEmployee = () => {
         }
       };
 
-  const filteredEmployees = () => {
-    let filtered = employees;
-    if (searchQuery) {
-      const regex = new RegExp(`(${searchQuery})`, 'gi');
-      filtered = filtered.map(employee => ({
-        ...employee,
-        name: highlightText(employee.name),
-        email: highlightText(employee.email),
-        phone: highlightText(employee.phone),
-        designation: highlightText(employee.designation),
-        department: highlightText(employee.department),
-        selectedOption: highlightText(employee.selectedOption)
-      }));
-    }
-    return filtered;
-  };
+const filteredEmployees = () => {
+  let filtered = employees;
+  if (searchQuery) {
+    const regex = new RegExp(`(${searchQuery})`, 'gi');
+    filtered = filtered.map(employee => ({
+      ...employee,
+      name: highlightText(employee.name),
+      email: highlightText(employee.email),
+      phone: highlightText(employee.phone),
+      designation: highlightText(employee.designation),
+      department: highlightText(employee.department),
+      selectedOption: highlightText(employee.selectedOption)
+    }));
+  }
+  return Array.isArray(filtered) ? filtered : [];
+};
+
+  // const filteredEmployees = () => {
+  //   let filtered = Array.isArray(employees) ? employees : [];
+  //   if (searchQuery) {
+  //     const regex = new RegExp(`(${searchQuery})`, 'gi');
+  //     filtered = filtered.map(employee => ({
+  //       ...employee,
+  //       name: highlightText(employee.name),
+  //       email: highlightText(employee.email),
+  //       phone: highlightText(employee.phone),
+  //       designation: highlightText(employee.designation),
+  //       department: highlightText(employee.department),
+  //       selectedOption: highlightText(employee.selectedOption)
+  //     }));
+  //   }
+  //   return filtered;
+  // };
+  
 
   return (
     <React.Fragment>
@@ -85,18 +115,6 @@ const ManageEmployee = () => {
       <div className="container">
         <h2> Employees</h2>
         <NavLink to='/addEmployee'><button className='addemp'>Add Employee</button></NavLink>
-        {/* <div className="search-containerr">
-          <label className='searchemp'>
-            Search Employee
-            <input
-              type="text"
-              placeholder="Search..."
-              className="search-barr"
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </label>
-        </div> */}
-
         <table className="table">
           <thead>
             <tr>
@@ -112,31 +130,34 @@ const ManageEmployee = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredEmployees().map(employee => (
-              <tr key={employee._id}>
-                <td dangerouslySetInnerHTML={{ __html: employee.name }}></td>
-                <td dangerouslySetInnerHTML={{ __html: employee.email }}></td>
-                <td dangerouslySetInnerHTML={{ __html: employee.phone }}></td>
-                <td dangerouslySetInnerHTML={{ __html: employee.designation }}></td>
-                <td dangerouslySetInnerHTML={{ __html: employee.department }}></td>
-                <td dangerouslySetInnerHTML={{ __html: employee.selectedOption }}></td>
-                <td style={{
-                  color: !employee.status ? 'green' : 'blue',
-                  borderRadius: '18px'  // Adjust the value as needed for the desired roundness
-                }}>
-                  {employee.status}
-                </td>
+          {filteredEmployees().map((employee, index) => (
+          <tr key={index}>
+            <td dangerouslySetInnerHTML={{ __html: employee.name }}></td>
+            <td dangerouslySetInnerHTML={{ __html: employee.email }}></td>
+            <td dangerouslySetInnerHTML={{ __html: employee.phone }}></td>
+            <td dangerouslySetInnerHTML={{ __html: employee.designation }}></td>
+            <td dangerouslySetInnerHTML={{ __html: employee.department }}></td>
+            <td dangerouslySetInnerHTML={{ __html: employee.selectedOption }}></td>
+            <td style={{
+              color: !employee.status ? 'green' : 'blue',
+              borderRadius: '18px'  // Adjust the value as needed for the desired roundness
+            }}>
+              {employee.status}
+            </td>
+            <td> 
+              <button className='resume' onClick={() => handleViewResume(employee.employeeId)}> Resume </button>   
+            </td>
+            <td>  
+              <NavLink to={`/update-employee/${employee.employeeId}`}>
+                <button className='editbtu'>Edit</button>
+              </NavLink>
+              <button className='delt' onClick={() => handleDelete(employee.employeeId)}> Delete </button>
+            </td>
+          </tr>
+        ))}
 
-                <td> <button className='resume' onClick={() => handleViewResume(employee._id)}> Resume </button>   </td>
-                {/* <td><button className='editbtu'>Edit</button><button className='delt'> Delete </button> </td><br></br> */}
-                <td>  <NavLink to={`/update-employee/${employee.employeeId}`}>
-                  <button className='editbtu'>Edit</button>
-                </NavLink>
-                  <button className='delt' onClick={() => handleDelete(employee.employeeId)}> Delete </button></td>
 
-              </tr>
-
-            ))}
+            
           </tbody>
         </table>
       </div>

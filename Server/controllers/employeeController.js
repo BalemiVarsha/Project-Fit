@@ -130,6 +130,7 @@ const getDepartments = async (req, res) => {
 const getEmployeeData = async (req, res) => {
   try {
     const employees = await Employee.find();
+    // console.log(typeof employees)
     res.json(employees);
   } catch (error) {
     console.error('Error fetching employee data:', error);
@@ -151,14 +152,12 @@ const updateEmployee = async (req, res) => {
 
     // Check if a file has been uploaded
     if (req.file) {
-      // Handle file upload
+     
       resumePath = req.file.path; // Assuming req.file.path contains the new file path
       
       // If there was a previous file path, delete it here
       if (employee.resume) {
-        // Delete previous file using fs.unlink or your file system's equivalent method
-        // Example:
-        // fs.unlinkSync(employee.resume);
+       
       }
     }
 

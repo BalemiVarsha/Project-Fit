@@ -12,11 +12,13 @@ const DashB = () => {
         // Fetch employee count from MongoDB collection
         const fetchEmployeeCount = async () => {
             try {
-                const response = await fetch(`${URL}/employee-count`);
+                // const response = await fetch(`${URL}/employee-count`);
+                const response=await fetch(`http://demo.darwinboxlocal.com/employee/countemployees`)
                 if (!response.ok) {
                     throw new Error('Failed to fetch employee count');
                 }
                 const data = await response.json();
+                //   console.log('Fetched projects:', data); // Debugging line
                 setEmployeeCount(data.count);
             } catch (error) {
                 console.error('Error fetching employee count:', error);
@@ -26,7 +28,8 @@ const DashB = () => {
         // Fetch project count from MongoDB collection
         const fetchProjectCount = async () => {
             try {
-                const response = await fetch(`${URL}/project-count`);
+                // const response = await fetch(`${URL}/project-count`);
+                const response=await fetch(`http://demo.darwinboxlocal.com/project/projectcount`)
                 if (!response.ok) {
                     throw new Error('Failed to fetch project count');
                 }
@@ -38,7 +41,8 @@ const DashB = () => {
         };
         const fetchRequestCount = async () => {
             try {
-                const response = await fetch(`${URL}/request-count`);
+                // const response = await fetch(`${URL}/request-count`);
+                const response=await fetch(`http://demo.darwinboxlocal.com/projectrequest/getrequestcount`)
                 if (!response.ok) {
                     throw new Error('Failed to fetch project count');
                 }
@@ -50,12 +54,19 @@ const DashB = () => {
         };
         const fetchProjects = async () => {
             try {
-                const response = await fetch(`${URL}/Project-data`);
+                // const response = await fetch(`${URL}/Project-data`);
+                const response=await fetch(`http://demo.darwinboxlocal.com/project/displayprojects`)
                 if (!response.ok) {
                     throw new Error('Failed to fetch projects');
                 }
                 const data = await response.json();
-                setProjects(data);
+                console.log('Fetched projects:', data); // Debugging line
+                // setProjects(data);
+                if (data.projects && Array.isArray(data.projects)) {
+                    setProjects(data.projects);
+                } else {
+                    console.error('Invalid projects data format:', data);
+                }
             } catch (error) {
                 console.error('Error fetching projects:', error);
             }
@@ -75,9 +86,14 @@ const DashB = () => {
         }
       };
       const splitDateByT = (date) => {
-        return date.split('T')[0];
+        if (date) {
+            const dateObj = new Date(date);
+            // if (!isNaN(dateObj)) {
+                return dateObj.toISOString().split('T')[0];
+            // }
+        }
+        // return 'N/A';
     };
-
     return (
         <React.Fragment>
             <PmDashboard />
@@ -125,7 +141,7 @@ const DashB = () => {
                                     <td>{splitDateByT(project.endDate)}</td> {/* Splitting and displaying end date */}
                                     <td>{project.department}</td>
                                     <td>{project.description}</td>
-                                    <td>{project.referredEmployees.length > 0 ? "Referred" : "Not Referred"}</td>
+                                    <td>{project.referredEmployees && project.referredEmployees.length > 0 ? "Referred" : "Not Referred"}</td>
                                     
                                     {/* <tb><button className="pdf" onClick={() => viewProjectPdf(project.projectId)}>View PDF</button></tb> */}
                                     

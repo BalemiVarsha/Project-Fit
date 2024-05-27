@@ -18,19 +18,19 @@ import RmNavbar from './RmNavbar';
         status:'',
         resume:null,
       });
+      // const response = await fetch(`${URL}/employee-data/${employeeId}`);
       useEffect(() => {
         const fetchProjectDetails = async () => {
           try {
-            const response = await fetch(`${URL}/employee-data/${employeeId}`);
+            const response = await fetch(`http://demo.darwinboxlocal.com/employee/getemployeebyId?id=${employeeId}`);
             if (!response.ok) {
               throw new Error('Failed to fetch project details');
             }
             const data = await response.json();
-      
-            // Convert the date strings received from the API into the required format
-         
-      
-            setEmployeeDetails(data);
+    
+            // Access employee details from the nested object
+            const employeeDetails = data.success;
+            setEmployeeDetails(employeeDetails);
           } catch (error) {
             console.error('Error fetching project details:', error);
           }
@@ -66,8 +66,12 @@ import RmNavbar from './RmNavbar';
          formData.append('status', employeeDetails.status);
          formData.append('resume', employeeDetails.resume);
     
-          const response = await fetch(`${URL}/update-employee/${employeeId}`, {
-            method: 'PUT',
+          // const response = await fetch(`${URL}/update-employee/${employeeId}`, {
+          //   method: 'POST',
+          //   body: formData
+          // });
+          const response = await fetch(`http://demo.darwinboxlocal.com/employee/updateemployee?id=${employeeId}`, {
+            method: 'POST',
             body: formData
           });
     

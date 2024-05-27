@@ -5,7 +5,7 @@ import './Request.css';
 
 
 const Request = () => {
-  const [projectRequest, setProjectRequest] = useState(null);
+  const [projectRequest, setProjectRequest] = useState([]);
   const [projects, setProjects] = useState([]);
   const fetchProjData = async () => {
     try {
@@ -21,12 +21,18 @@ const Request = () => {
   };
   const fetchProjectData = async () => {
     try {
-      const response = await fetch(`${URL}/api/send-request`);
+      // const response = await fetch(`${URL}/api/send-request`);
+      const response = await fetch('http://demo.darwinboxlocal.com/projectRequest/GetProjectRequests');
       if (!response.ok) {
         throw new Error('Failed to fetch project data');
       }
       const data = await response.json();
-      setProjectRequest(data);
+      // setProjectRequest(data);
+      if (data.success) {
+        setProjectRequest(data.projects); // Extract projects array from response
+      } else {
+        console.error('Failed to fetch project requests:', data);
+      }
     } catch (error) {
       console.error('Error fetching project data:', error);
     }
@@ -35,12 +41,13 @@ const Request = () => {
   useEffect(() => {
     fetchProjectData();
     fetchProjData ();
-  }, [projectRequest]);
+  }, []);
 
   const viewProjectPdf = async (projectId) => {
 
     try {
-      window.open(`${URL}/Project-data/${projectId}/pdf`, '_blank');
+      // window.open(`${URL}/Project-data/${projectId}/pdf`, '_blank');
+      window.open(`http://demo.darwinboxlocal.com/project/getprojectpdf?projectId=${projectId}`,'_blank')
     } catch (error) {
       console.error('Error viewing project PDF:', error);
     }
@@ -71,7 +78,7 @@ const Request = () => {
       <div className="conntainer">
         <h2>Request Sent</h2>
         <div className="prooject-container">
-          {projectRequest && projectRequest.map((projectreq) => {
+        {Array.isArray(projectRequest) && projectRequest.map((projectreq) => {
             const matchingProject = projects.find(project => project.title === projectreq.title);
             return matchingProject && (
               <div key={projectreq._id} className="prooject-box">
